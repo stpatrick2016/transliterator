@@ -4,3 +4,4 @@ EXPORTS
 	RegisterKeyboardLayout
 	EnableTransliteration
 	DisableTransliteration
+	SetCurrentLayout

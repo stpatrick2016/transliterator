@@ -69,6 +69,10 @@ void DisableTransliteration()
 	}
 }
 
+void SetCurrentLayout(int index)
+{
+	g_currentLayout = index;
+}
 
 ///////////////////////////////////////////////////////////////////
 ///Private methods and helpers
@@ -99,10 +103,10 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	bool processed = false;
 	int layoutIndex = g_currentLayout;
-	if (HC_ACTION == nCode && (wParam == WM_KEYDOWN || wParam == WM_KEYUP) && layoutIndex >= 0) 
+	if (HC_ACTION == nCode && (wParam == WM_KEYDOWN || wParam == WM_KEYUP) ) 
 	{
 		PKBDLLHOOKSTRUCT info = (PKBDLLHOOKSTRUCT)lParam;
-		if(!ProcessLayoutSwitch(info, wParam))
+		if(!ProcessLayoutSwitch(info, wParam) && layoutIndex >= 0)
 		{
 			processed = g_layouts.at(layoutIndex)->ProcessEvent(info, wParam);
 		}
@@ -116,5 +120,7 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 
 bool ProcessLayoutSwitch(PKBDLLHOOKSTRUCT info, WPARAM wParam)
 {
+	//we should check for special key - in case user requested to switch to another layout or disable transliteration.
+	//to disable transliteration, simply set g_currentLayout to -1 and return false.
 	return false;
 }
