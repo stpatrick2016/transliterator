@@ -44,8 +44,13 @@ void EnableTransliteration()
 {
 	if(g_hookThread == NULL || GetThreadId(g_hookThread) == 0)
 	{
+		ATLTRACE(L"Starting keyboard hooking thread\r\n");
 		DWORD threadId = 0;
 		g_hookThread = CreateThread(NULL, 0, HookThread, NULL, 0, &threadId);
+	}
+	else
+	{
+		ATLTRACE(L"Hook thread already started. Ignoring subsequent request\r\n");
 	}
 }
 
@@ -56,6 +61,7 @@ void DisableTransliteration()
 		DWORD threadId = GetThreadId(g_hookThread);
 		if(threadId != 0)
 		{
+			ATLTRACE(L"Sending STOP signal to hook thread\r\n");
 			PostThreadMessage(threadId, WM_QUIT, 0, 0);
 			if(WAIT_TIMEOUT == WaitForSingleObject(g_hookThread, 2000))
 			{
@@ -72,6 +78,7 @@ void DisableTransliteration()
 void SetCurrentLayout(int index)
 {
 	g_currentLayout = index;
+	ATLTRACE(L"Current layout is changed to %d\r\n", index);
 }
 
 ///////////////////////////////////////////////////////////////////

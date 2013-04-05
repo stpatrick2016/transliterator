@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookTest", "HookTest\HookTest.vcxproj", "{F2C8BA16-E392-472A-8384-B3A089C63A24}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42C8C6FE-AF2E-4126-8D98-D80B84A9BAF3} = {42C8C6FE-AF2E-4126-8D98-D80B84A9BAF3}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{8E6CE5DC-4EF4-40BA-912C-6216A006C731}"
 EndProject
@@ -12,6 +15,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TrEngine", "TrEngine\TrEngine.vcxproj", "{42C8C6FE-AF2E-4126-8D98-D80B84A9BAF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transliterator.Application", "Transliterator.Application\Transliterator.Application.csproj", "{BDAE7212-AC25-46B9-B92C-B781EB01AB34}"
+	ProjectSection(ProjectDependencies) = postProject
+		{42C8C6FE-AF2E-4126-8D98-D80B84A9BAF3} = {42C8C6FE-AF2E-4126-8D98-D80B84A9BAF3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Transliterator.UI.Windows", "Transliterator.UI.Windows\Transliterator.UI.Windows.csproj", "{98AF75A4-013B-49DB-A43C-CA1A8E50BFA8}"
 EndProject

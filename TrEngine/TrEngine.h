@@ -11,3 +11,10 @@
 #endif
 
 BOOL RegisterKeyboardLayout(LPCTSTR filePath);
+void EnableTransliteration();
+void DisableTransliteration();
+void SetCurrentLayout(int index);
+
+typedef BOOL (*LPREGISTER_KEYBOARD_LAYOUT_ROUTINE)(LPCTSTR filePath);
+typedef VOID (*LPENABLE_TRANSLITERATION_ROUTINE)();
+typedef VOID (*LPSET_CURRENT_LAYOUT_ROUTINE)(int index);
