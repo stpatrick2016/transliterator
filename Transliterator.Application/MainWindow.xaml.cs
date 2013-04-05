@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,6 +23,36 @@ namespace Transliterator
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        [DllImport("TrEngine.dll", CharSet = CharSet.Unicode)]
+        static extern bool RegisterKeyboardLayout(string filepath);
+
+        [DllImport("TrEngine.dll")]
+        static extern void EnableTransliteration();
+        
+        [DllImport("TrEngine.dll")]
+        static extern void DisableTransliteration();
+
+        [DllImport("TrEngine.dll")]
+        static extern void SetCurrentLayout(int index);
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            EnableTransliteration();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            DisableTransliteration();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Russian.kbd");
+            RegisterKeyboardLayout(path);
+            SetCurrentLayout(0);
+            EnableTransliteration();
         }
     }
 }

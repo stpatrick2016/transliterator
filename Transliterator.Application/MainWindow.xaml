@@ -3,8 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Transliterator"
         Height="350"
-        Width="525">
-    <Grid>
-
-    </Grid>
+        Width="525"
+        Loaded="Window_Loaded">
+    <StackPanel Orientation="Vertical">
+        <Button Click="Button_Click">Enable</Button>
+        <Button Click="Button_Click_1">Disable</Button>
+    </StackPanel>
 </Window>

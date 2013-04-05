@@ -21,7 +21,7 @@ bool ProcessLayoutSwitch(PKBDLLHOOKSTRUCT info, WPARAM wParam);
 ////////////////////////////////////////////////////////////////
 // Exported functions
 //
-BOOL RegisterKeyboardLayout(LPCTSTR filePath)
+BOOL WINAPI RegisterKeyboardLayout(LPCTSTR filePath)
 {
 	BOOL ret = FALSE;
 	if(g_layoutsCache.find(filePath) == g_layoutsCache.end())
@@ -40,7 +40,7 @@ BOOL RegisterKeyboardLayout(LPCTSTR filePath)
 	return ret;
 }
 
-void EnableTransliteration()
+void WINAPI EnableTransliteration()
 {
 	if(g_hookThread == NULL || GetThreadId(g_hookThread) == 0)
 	{
@@ -54,7 +54,7 @@ void EnableTransliteration()
 	}
 }
 
-void DisableTransliteration()
+void WINAPI DisableTransliteration()
 {
 	if(g_hookThread != NULL)
 	{
@@ -75,7 +75,7 @@ void DisableTransliteration()
 	}
 }
 
-void SetCurrentLayout(int index)
+void WINAPI SetCurrentLayout(int index)
 {
 	g_currentLayout = index;
 	ATLTRACE(L"Current layout is changed to %d\r\n", index);
