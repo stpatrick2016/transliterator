@@ -1,0 +1,6 @@
+LIBRARY TrEngine
+
+EXPORTS
+	RegisterKeyboardLayout
+	EnableTransliteration
+	DisableTransliteration
