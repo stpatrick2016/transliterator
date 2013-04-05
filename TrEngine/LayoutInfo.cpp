@@ -18,14 +18,41 @@ CLayoutInfo::CLayoutInfo(LPCTSTR layoutPath)
 		CharSequence* currentSequence = NULL;
 		bool isTarget = false;
 		bool isShift = false;
+		bool isReadingHeader = false;
+		std::wstring metaString;
 		std::basic_string<wchar_t> unicodeUnparsed;
 		while(!feof(stream))
 		{
 			//read next character from file
 			wint_t ch = fgetwc(stream);
 
-			//in case this is end of line, close the current sequence
+			//check if this is a header start. This must only happen at the beginning of the file
+			if(ch == L':' && currentSequence == NULL && m_sequences.empty() && !isReadingHeader)
+			{
+				isReadingHeader = true;
+				metaString = L":";
+			}
+
+			//check if we are already in reading header mode
+			else if(isReadingHeader)
+			{
 			if(ch == L'\r' || ch == L'\n')
+			{
+					if(metaString == L":end header:")
+					{
+						isReadingHeader = false;
+					}
+
+					metaString.clear();
+				}
+				else
+				{
+					metaString += ch;
+				}
+			}
+
+			//in case this is end of line, close the current sequence
+			else if(ch == L'\r' || ch == L'\n')
 			{
 				//add to the list if we had a sequence
 				if(currentSequence != NULL)

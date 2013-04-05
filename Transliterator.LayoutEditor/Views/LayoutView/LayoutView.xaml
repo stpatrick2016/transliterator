@@ -14,7 +14,16 @@
                 <Button Name="fillEnglish"
                         Click="fillEnglish_Click">Auto fill source</Button>
             </StackPanel>
-            <DataGrid ItemsSource="{Binding Layout.MappingPairs}" AutoGenerateColumns="False">
+            <Grid DockPanel.Dock="Top" Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Layout name" />
+                <TextBox Text="{Binding Layout.LayoutName}" Grid.Column="1" Width="200" />
+            </Grid>
+            <DataGrid ItemsSource="{Binding Layout.MappingPairs}" AutoGenerateColumns="False" Margin="3">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Source"
                                         Binding="{Binding Source}" />

@@ -1,3 +1,6 @@
+:begin header:
+name=Russian Translit+
+:end header:
 v=0432
 zh=0436
 a=0430
@@ -26,7 +29,6 @@ x=0445
 y=044b
 z=0437
 jo=0451
-zh=0436
 ch=0447
 sh=0448
 shh=0449
