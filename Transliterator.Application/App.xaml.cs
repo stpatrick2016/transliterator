@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using Transliterator.UI.Windows;
 
-namespace Transliterator.LayoutEditor
+namespace Transliterator
 {
     /// <summary>
     /// Interaction logic for App.xaml

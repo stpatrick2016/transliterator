@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
 
-namespace Transliterator.LayoutEditor.Views
+namespace Transliterator.UI.Windows.Views
 {
-    public class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged
     {
         #region INotifyPropertyChanged Members
         /// <summary>
@@ -87,6 +87,5 @@ namespace Transliterator.LayoutEditor.Views
             return SetProperty(memberExpression.Member.Name, ref field, value);
         }
         #endregion
-
     }
 }
