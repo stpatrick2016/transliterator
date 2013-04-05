@@ -154,9 +154,9 @@ bool CLayoutInfo::ProcessEvent(PKBDLLHOOKSTRUCT keyInfo, WPARAM wParam)
 	if(!ProcessSpecialKey(keyInfo, wParam))
 		return false;
 
-	if(m_isControlPressed || m_isAltPressed)
+	if(m_isControlPressed || m_isAltPressed || m_isWindowsKeyPressed)
 	{
-		ATLTRACE(L"Control or Alt keys are pressed, ignoring the key");
+		ATLTRACE(L"Control, Alt or Windows keys are pressed, ignoring the key");
 		return false;
 	}
 

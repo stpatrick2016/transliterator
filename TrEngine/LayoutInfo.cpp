@@ -10,7 +10,7 @@ CLayoutInfo::CLayoutInfo(LPCTSTR layoutPath)
 {
 	m_isLoaded = false;
 	m_maxSourceLength = 0;
-	m_isShiftPressed = m_isControlPressed = m_isAltPressed = m_isCapsLock = false;
+	m_isShiftPressed = m_isControlPressed = m_isAltPressed = m_isCapsLock = m_isWindowsKeyPressed = false;
 
 	FILE* stream = NULL;
 	if(_tfopen_s(&stream, layoutPath, L"r, ccs=UNICODE") == 0)
@@ -156,9 +156,9 @@ bool CLayoutInfo::ProcessEvent(PKBDLLHOOKSTRUCT keyInfo, WPARAM wParam)
 	if(!ProcessSpecialKey(keyInfo, wParam))
 		return false;
 
-	if(m_isControlPressed || m_isAltPressed)
+	if(m_isControlPressed || m_isAltPressed || m_isWindowsKeyPressed)
 	{
-		ATLTRACE(L"Control or Alt keys are pressed, ignoring the key");
+		ATLTRACE(L"Control, Alt or Windows keys are pressed, ignoring the key");
 		return false;
 	}
 
@@ -247,29 +247,35 @@ bool CLayoutInfo::ProcessSpecialKey(PKBDLLHOOKSTRUCT keyInfo, WPARAM wParam)
 	case VK_RSHIFT:
 	case VK_SHIFT:
 		m_isShiftPressed = wParam == WM_KEYDOWN;
-		ATLTRACE(L"SHIFT pressed");
+		ATLTRACE(L"SHIFT pressed\r\n");
 		ret = false;
 		break;
 	case VK_LMENU:
 	case VK_RMENU:
 	case VK_MENU:
 		m_isAltPressed = wParam == WM_KEYDOWN;
-		ATLTRACE(L"ALT pressed");
+		ATLTRACE(L"ALT pressed\r\n");
 		ret = false;
 		break;
 	case VK_LCONTROL:
 	case VK_RCONTROL:
 	case VK_CONTROL:
 		m_isControlPressed = wParam == WM_KEYDOWN;
-		ATLTRACE(L"CTRL pressed");
+		ATLTRACE(L"CTRL pressed\r\n");
 		ret = false;
 		break;
 	case VK_CAPITAL:
 		if(wParam == WM_KEYUP)
 		{
 			m_isCapsLock = !m_isCapsLock;
-			ATLTRACE(L"CAPSLOCK pressed");
+			ATLTRACE(L"CAPSLOCK pressed\r\n");
 		}
+		ret = false;
+		break;
+	case VK_LWIN:
+	case VK_RWIN:
+		m_isWindowsKeyPressed = wParam == WM_KEYDOWN;
+		ATLTRACE(L"Windows Key pressed\r\n");
 		ret = false;
 		break;
 	}

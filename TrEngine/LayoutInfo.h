@@ -71,6 +71,7 @@ private:
 	bool m_isShiftPressed,
 		 m_isControlPressed,
 		 m_isAltPressed,
-		 m_isCapsLock;
+		 m_isCapsLock,
+		 m_isWindowsKeyPressed;
 };
 
