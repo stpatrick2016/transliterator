@@ -59,7 +59,20 @@ CLayoutInfo::CLayoutInfo(LPCTSTR layoutPath)
 				{
 					//fill in the shifted sequence if needed
 					if(!isShift)
-						currentSequence->ShiftTarget = currentSequence->Target;
+					{
+						//not the best way to convert to upper case. Currently has no other idea
+						//tried towupper() - it doesn't work at all.
+						for(size_t ii=0; ii < currentSequence->Target.size(); ii++)
+						{
+							INPUT shiftedKey = currentSequence->Target.at(ii);
+							if(iswlower(shiftedKey.ki.wScan))
+							{
+								shiftedKey.ki.wScan = shiftedKey.ki.wScan - 0x20;
+							}
+
+							currentSequence->ShiftTarget.push_back(shiftedKey);
+						}
+					}
 
 					m_maxSourceLength = max((int)currentSequence->Source.size(), m_maxSourceLength);
 					m_sequences[currentSequence->Source] = currentSequence;
@@ -123,7 +136,20 @@ CLayoutInfo::CLayoutInfo(LPCTSTR layoutPath)
 		{
 			//fill in the shifted sequence if needed
 			if(!isShift)
-				currentSequence->ShiftTarget = currentSequence->Target;
+			{
+				//not the best way to convert to upper case. Currently has no other idea
+				//tried towupper() - it doesn't work at all.
+				for(size_t ii=0; ii < currentSequence->Target.size(); ii++)
+				{
+					INPUT shiftedKey = currentSequence->Target.at(ii);
+					if(iswlower(shiftedKey.ki.wScan))
+					{
+						shiftedKey.ki.wScan = shiftedKey.ki.wScan - 0x20;
+					}
+
+					currentSequence->ShiftTarget.push_back(shiftedKey);
+				}
+			}
 			m_maxSourceLength = max((int)currentSequence->Source.size(), m_maxSourceLength);
 			m_sequences[currentSequence->Source] = currentSequence;
 			currentSequence = NULL;
