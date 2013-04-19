@@ -5,3 +5,4 @@ EXPORTS
 	EnableTransliteration
 	DisableTransliteration
 	SetCurrentLayout
+	IsTransliterationEnabled

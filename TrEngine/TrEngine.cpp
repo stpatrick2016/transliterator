@@ -75,6 +75,11 @@ void WINAPI DisableTransliteration()
 	}
 }
 
+BOOL WINAPI IsTransliterationEnabled()
+{
+	return g_hookThread != NULL;
+}
+
 void WINAPI SetCurrentLayout(int index)
 {
 	g_currentLayout = index;

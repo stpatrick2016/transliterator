@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using Transliterator.LayoutEditor.Infrastructure;
+﻿using Transliterator.LayoutEditor.Infrastructure;
 using Transliterator.UI.Windows.Views;
 
 namespace Transliterator.LayoutEditor.Views
