@@ -18,6 +18,18 @@ namespace Transliterator.UI.Windows.Views
             EngineAdapter.SetCurrentLayout(0);
         }
 
+        public class StateChangedEventArgs : EventArgs
+        {
+            public StateChangedEventArgs(bool isEnabled)
+            {
+                IsEnabled = isEnabled;
+            }
+
+            public bool IsEnabled { get; private set; }
+        }
+
+        public event EventHandler<StateChangedEventArgs> StateChanged;
+
         public ICommand EnableTranslitCommand { get; private set; }
         public ICommand DisableTranslitCommand { get; private set; }
 
@@ -39,11 +51,21 @@ namespace Transliterator.UI.Windows.Views
         private void TurnOn()
         {
             EngineAdapter.EnableTransliteration();
+            RaiseStateChanged(true);
         }
 
         private void TurnOff()
         {
             EngineAdapter.DisableTransliteration();
+            RaiseStateChanged(false);
+        }
+
+        private void RaiseStateChanged(bool isEnabled)
+        {
+            if (StateChanged != null)
+            {
+                StateChanged(this, new StateChangedEventArgs(isEnabled));
+            }
         }
     }
 }
