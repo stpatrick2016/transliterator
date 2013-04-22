@@ -47,6 +47,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\GlobalAssemblyInfo.cs">
+      <Link>Properties\GlobalAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Controls\HotkeySelectorControl.xaml.cs">
       <DependentUpon>HotkeySelectorControl.xaml</DependentUpon>
     </Compile>
