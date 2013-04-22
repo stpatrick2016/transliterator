@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
+using Transliterator.UI.Windows;
 using Transliterator.UI.Windows.Views;
 
 namespace Transliterator
@@ -13,6 +14,7 @@ namespace Transliterator
     {
         private System.Windows.Forms.NotifyIcon _notifyIcon = null;
         private System.Drawing.Icon _enabledIcon = null, _disabledIcon = null;
+        private bool _reallyExiting = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,10 +43,13 @@ namespace Transliterator
         private void NotifyIcon_DoubleClick(object sender, System.EventArgs e)
         {
             this.Show();
+            WindowState = System.Windows.WindowState.Normal;
+            this.Focus();
         }
 
         private void Exit_Clicked(object sender, System.EventArgs e)
         {
+            _reallyExiting = true;
             this.Close();
         }
 
@@ -57,8 +62,16 @@ namespace Transliterator
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
+            if (GlobalConfiguration.Instance.MinimizeOnClose && !_reallyExiting)
+            {
+                WindowState = System.Windows.WindowState.Minimized;
+                e.Cancel = true;
+            }
+            else
+            {
+                _notifyIcon.Visible = false;
+                _notifyIcon.Dispose();
+            }
         }
 
         private void Window_StateChanged(object sender, EventArgs e)

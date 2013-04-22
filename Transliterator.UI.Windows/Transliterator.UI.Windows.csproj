@@ -51,6 +51,7 @@
       <DependentUpon>HotkeySelectorControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\HotkeySelectorViewModel.cs" />
+    <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="EngineAdapter.cs" />
     <Compile Include="GlobalConfiguration.cs" />
@@ -93,13 +94,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Skins\Default\Buttons_RD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Skins\Default\Images_RD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Skins\Default\" />
+    <Resource Include="Skins\Default\Images\Enabled_24px.png" />
+    <Resource Include="Skins\Default\Images\Disabled_24px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

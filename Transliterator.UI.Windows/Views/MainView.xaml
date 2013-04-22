@@ -4,13 +4,63 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:Transliterator.UI.Windows.Controls"
+             xmlns:converters="clr-namespace:Transliterator.UI.Windows.Converters"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <converters:InvertedBooleanToVisibilityConverter x:Key="invertedBooleanToVisibilityConverter" />
+    </UserControl.Resources>
     <StackPanel Orientation="Vertical">
-        <Button Command="{Binding EnableTranslitCommand}">Enable</Button>
-        <Button Command="{Binding DisableTranslitCommand}">Disable</Button>
-        <controls:HotkeySelectorControl Margin="10"
-                                        DataContext="{Binding HotkeyViewModel}" />
+        <GroupBox Header="Current state"
+                  Margin="7,3,7,3"
+                  Padding="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding EnableTranslitCommand}"
+                        Content="Enable"
+                        Width="64" />
+                <Button Command="{Binding DisableTranslitCommand}"
+                        Grid.Column="1"
+                        Content="Disable"
+                        Width="64" />
+
+                <Image Source="{StaticResource Enabled_24px}"
+                       Visibility="{Binding IsEnabled, Converter={StaticResource booleanToVisibilityConverter}}"
+                       Grid.Column="2"
+                       Width="24"
+                       Height="24"
+                       HorizontalAlignment="Right" />
+                <Image Source="{StaticResource Disabled_24px}"
+                       Visibility="{Binding IsEnabled, Converter={StaticResource invertedBooleanToVisibilityConverter}}"
+                       Grid.Column="2"
+                       Width="24"
+                       Height="24"
+                       HorizontalAlignment="Right" />
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Windows hotkey configuration"
+                  Margin="7,3,7,3"
+                  Padding="3">
+            <controls:HotkeySelectorControl Margin="10"
+                                            DataContext="{Binding HotkeyViewModel}" />
+        </GroupBox>
+
+        <GroupBox Header="Application configuration"
+                  Margin="7,3,7,3"
+                  Padding="3">
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="Load on Windows&#8482; startup"
+                          IsChecked="{Binding LoadOnStartup}" />
+                <CheckBox Content="Minimize to system tray on close"
+                          IsChecked="{Binding MinimizeOnClose}" />
+            </StackPanel>
+        </GroupBox>
     </StackPanel>
 </UserControl>

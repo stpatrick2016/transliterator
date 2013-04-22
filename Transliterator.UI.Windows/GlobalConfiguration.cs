@@ -38,6 +38,7 @@ namespace Transliterator.UI.Windows
         public bool LoadOnStartup { get; set; }
         public string Hotkey { get; set; }
         public string HotkeyModifier { get; set; }
+        public bool MinimizeOnClose { get; set; }
         #endregion
 
         #region Methods
@@ -47,6 +48,7 @@ namespace Transliterator.UI.Windows
             {
                 Hotkey = key.GetValue("Hotkey", null) as string;
                 HotkeyModifier = key.GetValue("HotkeyModifier", null) as string;
+                MinimizeOnClose = 1.Equals(key.GetValue("MinimizeOnClose", 0));
 
                 key.Close();
             }
@@ -68,6 +70,7 @@ namespace Transliterator.UI.Windows
             {
                 key.SetValue("Hotkey", Hotkey);
                 key.SetValue("HotkeyModifier", HotkeyModifier);
+                key.SetValue("MinimizeOnClose", MinimizeOnClose ? 1 : 0);
 
                 key.Close();
             }

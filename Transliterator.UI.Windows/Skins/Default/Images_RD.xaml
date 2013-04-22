@@ -1,0 +1,5 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageSource x:Key="Enabled_24px">Images/Enabled_24px.png</ImageSource>
+    <ImageSource x:Key="Disabled_24px">Images/Disabled_24px.png</ImageSource>
+</ResourceDictionary>

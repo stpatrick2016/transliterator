@@ -7,6 +7,7 @@ namespace Transliterator.UI.Windows.Views
     public class MainViewModel : ViewModelBase
     {
         #region Data members
+        private bool _isEnabled = false;
         #endregion
 
         public MainViewModel()
@@ -50,7 +51,6 @@ namespace Transliterator.UI.Windows.Views
 
         public HotkeySelectorViewModel HotkeyViewModel { get; private set; }
 
-
         public bool LoadOnStartup
         {
             get { return GlobalConfiguration.Instance.LoadOnStartup; }
@@ -65,15 +65,37 @@ namespace Transliterator.UI.Windows.Views
             }
         }
 
+        public bool MinimizeOnClose
+        {
+            get { return GlobalConfiguration.Instance.MinimizeOnClose; }
+            set
+            {
+                if (value != GlobalConfiguration.Instance.MinimizeOnClose)
+                {
+                    GlobalConfiguration.Instance.MinimizeOnClose = value;
+                    GlobalConfiguration.Instance.Save();
+                    OnPropertyChanged("MinimizeOnClose");
+                }
+            }
+        }
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set { SetProperty(() => IsEnabled, ref _isEnabled, value); }
+        }
+
         private void TurnOn()
         {
             EngineAdapter.EnableTransliteration();
+            IsEnabled = true;
             RaiseStateChanged(true);
         }
 
         private void TurnOff()
         {
             EngineAdapter.DisableTransliteration();
+            IsEnabled = false;
             RaiseStateChanged(false);
         }
 
