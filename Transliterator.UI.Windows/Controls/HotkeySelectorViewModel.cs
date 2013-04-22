@@ -107,12 +107,9 @@ namespace Transliterator.UI.Windows.Controls
                     | (UseShift ? KeyModifier.Shift : KeyModifier.None)
                     | (UseControl ? KeyModifier.Ctrl : KeyModifier.None)
                     | (UseWindowsKey ? KeyModifier.Win : KeyModifier.None);
-                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Philip Patrick\Transliterator"))
-                {
-                    key.SetValue("Hotkey", SelectedVirtualKey.ToString());
-                    key.SetValue("HotkeyModifier", modifier.ToString());
-                    key.Close();
-                }
+                GlobalConfiguration.Instance.Hotkey = SelectedVirtualKey.ToString();
+                GlobalConfiguration.Instance.HotkeyModifier = modifier.ToString();
+                GlobalConfiguration.Instance.Save();
 
                 SetHotkey();
             }
@@ -152,23 +149,16 @@ namespace Transliterator.UI.Windows.Controls
             _isLoading = true;
             try
             {
-                using (var key = Registry.CurrentUser.CreateSubKey(@"Software\Philip Patrick\Transliterator"))
-                {
-                    var s = key.GetValue("Hotkey", Key.None.ToString()) as string;
-                    Key selectedKey = Key.None;
-                    Enum.TryParse(s, out selectedKey);
-                    SelectedVirtualKey = selectedKey;
+                Key selectedKey = Key.None;
+                Enum.TryParse(GlobalConfiguration.Instance.Hotkey, out selectedKey);
+                SelectedVirtualKey = selectedKey;
 
-                    s = key.GetValue("HotkeyModifier", KeyModifier.None) as string;
-                    KeyModifier modifier = KeyModifier.None;
-                    Enum.TryParse(s, out modifier);
-                    UseShift = (modifier & KeyModifier.Shift) > 0;
-                    UseControl = (modifier & KeyModifier.Ctrl) > 0;
-                    UseAlt = (modifier & KeyModifier.Alt) > 0;
-                    UseWindowsKey = (modifier & KeyModifier.Win) > 0;
-
-                    key.Close();
-                }
+                KeyModifier modifier = KeyModifier.None;
+                Enum.TryParse(GlobalConfiguration.Instance.HotkeyModifier, out modifier);
+                UseShift = (modifier & KeyModifier.Shift) > 0;
+                UseControl = (modifier & KeyModifier.Ctrl) > 0;
+                UseAlt = (modifier & KeyModifier.Alt) > 0;
+                UseWindowsKey = (modifier & KeyModifier.Win) > 0;
 
                 SetHotkey();
             }

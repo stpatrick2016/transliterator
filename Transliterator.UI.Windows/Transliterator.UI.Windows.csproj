@@ -53,6 +53,7 @@
     <Compile Include="Controls\HotkeySelectorViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="EngineAdapter.cs" />
+    <Compile Include="GlobalConfiguration.cs" />
     <Compile Include="Hotkey.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

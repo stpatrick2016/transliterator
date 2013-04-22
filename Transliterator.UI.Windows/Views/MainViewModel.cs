@@ -6,6 +6,9 @@ namespace Transliterator.UI.Windows.Views
 {
     public class MainViewModel : ViewModelBase
     {
+        #region Data members
+        #endregion
+
         public MainViewModel()
         {
             HotkeyViewModel = new HotkeySelectorViewModel();
@@ -47,6 +50,20 @@ namespace Transliterator.UI.Windows.Views
 
         public HotkeySelectorViewModel HotkeyViewModel { get; private set; }
 
+
+        public bool LoadOnStartup
+        {
+            get { return GlobalConfiguration.Instance.LoadOnStartup; }
+            set 
+            {
+                if (value != GlobalConfiguration.Instance.LoadOnStartup)
+                {
+                    GlobalConfiguration.Instance.LoadOnStartup = value;
+                    GlobalConfiguration.Instance.Save();
+                    OnPropertyChanged("LoadOnStartup");
+                }
+            }
+        }
 
         private void TurnOn()
         {
