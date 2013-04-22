@@ -5,9 +5,12 @@
         Title="Transliterator"
         Height="350"
         Width="525"
+        MinWidth="350"
+        MinHeight="300"
         Closing="Window_Closing"
         Visibility="Hidden"
-        StateChanged="Window_StateChanged">
+        StateChanged="Window_StateChanged"
+        Icon="ApplicationIcon.ico">
     <Window.Resources>
         <views:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
