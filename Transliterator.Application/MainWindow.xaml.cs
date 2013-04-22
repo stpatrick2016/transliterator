@@ -33,7 +33,7 @@ namespace Transliterator
             _notifyIcon.DoubleClick += NotifyIcon_DoubleClick;
             _notifyIcon.Visible = true;
             _notifyIcon.ContextMenu = new System.Windows.Forms.ContextMenu();
-            _notifyIcon.ContextMenu.MenuItems.Add("Open", NotifyIcon_DoubleClick);
+            _notifyIcon.ContextMenu.MenuItems.Add("Open", NotifyIcon_DoubleClick).DefaultItem = true;
             _notifyIcon.ContextMenu.MenuItems.Add("-");
             _notifyIcon.ContextMenu.MenuItems.Add("Exit", Exit_Clicked);
         }
