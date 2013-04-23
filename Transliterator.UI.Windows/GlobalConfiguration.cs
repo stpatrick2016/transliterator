@@ -80,7 +80,7 @@ namespace Transliterator.UI.Windows
                 if (LoadOnStartup)
                 {
                     string path = System.Reflection.Assembly.GetEntryAssembly().Location;
-                    key.SetValue("Transliterator (Philip Patrick)", path);
+                    key.SetValue("Transliterator (Philip Patrick)", String.Format("\"{0}\"", path));
                 }
                 else
                 {
