@@ -78,7 +78,11 @@ namespace Transliterator.LayoutEditor.Infrastructure
                         }
                         if (targets.Length > 1)
                         {
-                            pair.UpperCaseTarget = Char.ConvertFromUtf32(Int32.Parse(targets[1], System.Globalization.NumberStyles.HexNumber));
+                            if(targets[1].Length > 0)
+                            {
+                                pair.UpperCaseTarget = Char.ConvertFromUtf32(Int32.Parse(targets[1], System.Globalization.NumberStyles.HexNumber));
+                            }
+
                             pair.IsUpperCaseAutomatic = false;
                         }
                     }
