@@ -36,8 +36,8 @@ CLayoutInfo::CLayoutInfo(LPCTSTR layoutPath)
 			//check if we are already in reading header mode
 			else if(isReadingHeader)
 			{
-			if(ch == L'\r' || ch == L'\n')
-			{
+				if(ch == L'\r' || ch == L'\n')
+				{
 					if(metaString == L":end header:")
 					{
 						isReadingHeader = false;
